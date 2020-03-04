@@ -1,0 +1,1 @@
+export const urlFriendly = (path: string) => path.replace(/[^\w]/g, '-');

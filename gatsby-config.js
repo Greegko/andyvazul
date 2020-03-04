@@ -7,5 +7,13 @@ module.exports = {
   plugins: [
     `gatsby-plugin-react-helmet`,
     `gatsby-plugin-typescript`,
+    {
+      resolve: `gatsby-source-contentful`,
+      options: {
+        spaceId: `0twrrzkpeklw`,
+        accessToken: `BR7WT-9gBL6YY3sWG14XCYMytK46qVxXkP6kiKhtxrA`,
+        host: `cdn.contentful.com`,
+      },
+    },
   ],
 }

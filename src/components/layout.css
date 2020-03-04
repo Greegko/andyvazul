@@ -1,0 +1,30 @@
+@font-face {
+  font-family: Stern;
+  src: url("../assets/Stern-Regular.otf") format("opentype");
+}
+
+html, body, #___gatsby {
+  margin: 0;
+  height: 100%;
+  padding: 0;
+}
+
+.layout {
+  margin: 10px;
+  display: flex;
+  font-size: 12px;
+}
+
+.title {
+  margin-bottom: 15px;
+}
+
+.content--submenu {
+  display: flex;
+  flex: 1;
+}
+
+a, a:active, a:visited {
+  text-decoration: none;
+  color: black;
+}

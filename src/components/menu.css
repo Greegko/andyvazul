@@ -1,0 +1,19 @@
+.menu ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.menu-item-active {
+  font-weight: bold;
+}
+
+.menu ul li {
+  margin: 5px 0;
+}
+
+.main-menu {
+  flex: 1;
+  width: 100px;
+}
+
