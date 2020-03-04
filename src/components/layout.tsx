@@ -11,7 +11,7 @@ export const Layout = ({ children, location }) => {
   const activeMenu = menu.find(x => x.path === mainPath);
   const activeMenuPath = activeMenu?.path;
 
-  const hasSubmenu = children[0].type === Menu;
+  const hasSubmenu = children ? children[0].type === Menu : false;
 
   return (
     <div className="layout">
