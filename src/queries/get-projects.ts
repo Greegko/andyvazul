@@ -1,13 +1,25 @@
 import { useStaticQuery, graphql } from "gatsby";
 
-export interface Project {
+export enum ProjectType { Artistic, Curated };
+
+export interface ProjectBase {
   title: string;
   slug: string;
-  group?: string;
-  content?: any;
-  imageUrl?: string;
-  projectGroupId?: string;
+  imageUrl: string;
+  content: any;
 }
+
+export interface ArtisticProject extends ProjectBase {
+  type: ProjectType.Artistic;
+  group: string;
+}
+
+export interface CuratedProject extends ProjectBase {
+  type: ProjectType.Curated;
+  projectGroupTitle: string;
+}
+
+export type Project = ArtisticProject | CuratedProject;
 
 export function getProjects(): Project[] {
   const ProjectQuery = useStaticQuery(graphql`
@@ -17,6 +29,7 @@ export function getProjects(): Project[] {
         title,
         group,
         slug,
+        type,
         image {
           file {
             url
@@ -28,7 +41,7 @@ export function getProjects(): Project[] {
           }
         },
         project_group {
-          id
+          title
         }
       }
     }
@@ -39,8 +52,9 @@ export function getProjects(): Project[] {
     title: x.title,
     group: x.group,
     slug: x.slug,
+    type: x.type === 'Artistic work' ? ProjectType.Artistic : ProjectType.Curated,
     imageUrl: x.image?.file.url,
     content: x.content?.sourceCode.json,
-    projectGroupId: x.project_group?.id
+    projectGroupTitle: x.project_group ? x.project_group[0].title : undefined
   }));
 }

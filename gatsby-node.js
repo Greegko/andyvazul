@@ -5,7 +5,6 @@ exports.createPages = async (args) => {
   return Promise.all([
     generateMenuPages(args),
     generateProjectPages(args),
-    generateProjectGroupPages(args)
   ]);
 }
 
@@ -55,6 +54,10 @@ async function generateProjectPages({ graphql, actions: { createPage }, reporter
       nodes {
         group,
         slug,
+        type,
+        project_group {
+          title
+        }
         content {
           sourceCode {
             json
@@ -71,43 +74,30 @@ async function generateProjectPages({ graphql, actions: { createPage }, reporter
   }
 
 
+  const artisticPage = path.resolve(`src/pages/artistic-works.tsx`);
+  const curatedPage = path.resolve(`src/pages/curated-works.tsx`);
   const projectTemplate = path.resolve(`src/templates/project.tsx`);
-  result.data.allContentfulProject.nodes.filter(node => node.content).filter(node => node.slug).forEach((node) => {
-    const isArtisticWork = node.group !== null;
+
+  result.data.allContentfulProject.nodes.filter(node => node.content).filter(node => node.slug).forEach(node => {
+    const isArtisticWork = node.type === 'Artistic work';
     const pathPrefix = isArtisticWork ? '/artistic-works/' : '/curated-works/';
+    const group = isArtisticWork ? node.group : node.project_group[0].title;
+
+    // Create Project Page
     createPage({
-      path: pathPrefix + nameToPath(node.group) + '/' + node.slug,
+      path: pathPrefix + nameToPath(group) + '/' + node.slug,
       component: projectTemplate,
       context: {
         isArtisticWork,
         content: node.content.sourceCode.json
       }
-    })
-  });
-}
+    });
 
-async function generateProjectGroupPages({ graphql, actions: { createPage }, reporter }) {
-  const result = await graphql(`
-  query {
-    allContentfulProject {
-      nodes {
-        group
-      }
-    }
-  }`
-  );
-
-  if (result.errors) {
-    reporter.panicOnBuild(`Error while running GraphQL query.`);
-    return
-  }
-
-  const artisticPage = path.resolve(`src/pages/artistic-works.tsx`);
-  result.data.allContentfulProject.nodes.filter(node => node.group).forEach((node) => {
+    // Create Group Page
     createPage({
-      path: "/artistic-works/" + nameToPath(node.group),
-      component: artisticPage
-    })
+      path: pathPrefix + nameToPath(group),
+      component: isArtisticWork ? artisticPage : curatedPage,
+    });
   });
 }
 
