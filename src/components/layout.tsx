@@ -1,25 +1,32 @@
 import * as React from 'react';
 import { Menu } from './menu';
-import { getMenuItems } from '../queries';
+import { getMenuItems, MenuItem } from '../queries';
+import { Link } from 'gatsby';
+
+interface LayoutProperties {
+  children: any;
+  location: any;
+  submenu?: MenuItem[];
+}
 
 import './layout.css';
-import { Link } from 'gatsby';
-export const Layout = ({ children, location }) => {
-  const [mainPath] = location.pathname.split("/").splice(1);
+export const Layout = ({ children, location, submenu }: LayoutProperties) => {
+  const [mainPath, subPath] = location.pathname.split("/").splice(1);
 
   const menu = getMenuItems();
-  const activeMenu = menu.find(x => x.path === mainPath);
-  const activeMenuPath = activeMenu?.path;
-
-  const hasSubmenu = children ? children[0].type === Menu : false;
+  const activeMenu = menu.find(x => x.path === mainPath)?.path;
+  const activeSubMenu = submenu?.find(x => x.path === subPath)?.path;
 
   return (
     <div className="layout">
-      <div>
+      <div className="sidebar">
         <div className="title"><Link to="/">andyvazul</Link></div>
-        <Menu items={menu} activeItem={activeMenuPath} base="" />
+        <div className="menus">
+          <Menu items={menu} activeItem={activeMenu} base="" />
+          {submenu && <Menu items={submenu} activeItem={activeSubMenu} base={activeMenu} />}
+        </div>
       </div>
-      <div className={"content " + (hasSubmenu ? "content--submenu" : "")}>
+      <div className="content">
         {children}
       </div>
     </div>

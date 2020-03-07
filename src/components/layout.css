@@ -19,9 +19,12 @@ html, body, #___gatsby {
   margin-bottom: 15px;
 }
 
-.content--submenu {
+.sidebar {
+  margin-right: 125px;
+}
+
+.menus {
   display: flex;
-  flex: 1;
 }
 
 a, a:active, a:visited {

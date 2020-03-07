@@ -3,11 +3,9 @@ import { Link } from 'gatsby';
 import { getProjects, Project } from '../queries';
 import { urlFriendly, unique } from '../utils';
 import { Layout } from '../components/layout';
-import { Menu } from '../components/menu';
 
 import './artistic-works.css';
 const ArtisticWorksPage = ({ location }) => {
-  const [, projectLabel] = location.pathname.split("/").splice(1);
   const projects = getProjects().filter(project => !project.projectGroupId).filter(project => project.group);
 
   const allLabels = projects
@@ -21,8 +19,7 @@ const ArtisticWorksPage = ({ location }) => {
   }), {});
 
   return (
-    <Layout location={location}>
-      <Menu activeItem={projectLabel} items={allLabels} base={'/artistic-works'} />
+    <Layout location={location} submenu={allLabels}>
       <div className="projects">
         {allLabels.map(({ title }) => (
           <div className='projects-group'>
