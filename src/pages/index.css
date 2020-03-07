@@ -1,0 +1,9 @@
+.news-container {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.news-title {
+  float: left;
+  margin-right: 100px;
+}
