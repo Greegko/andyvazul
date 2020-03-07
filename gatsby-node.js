@@ -1,4 +1,5 @@
 const path = require('path');
+const fs = require('fs')
 
 exports.createPages = async (args) => {
   return Promise.all([
@@ -32,11 +33,14 @@ async function generateMenuPages({ graphql, actions: { createPage }, reporter })
     return
   }
 
-  const customPage = path.resolve(`src/templates/custom-page.tsx`);
+
   result.data.allContentfulMenu.nodes.filter(node => node.content).forEach((node) => {
+    const url = nameToPath(node.title);
+    const component = fs.existsSync(`src/templates/${url}.tsx`) ? path.resolve(`src/templates/${url}.tsx`) : path.resolve(`src/templates/custom-page.tsx`);
+
     createPage({
-      path: nameToPath(node.title),
-      component: customPage,
+      path: url,
+      component,
       context: {
         content: node.content.sourceCode.json
       }
