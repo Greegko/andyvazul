@@ -15,8 +15,12 @@ export const Menu = ({ items, activeItem, base = '/', setActiveElementPosition }
 
   if (setActiveElementPosition) {
     React.useEffect(() => {
-      const rect = activeMenuItemRef.current.getBoundingClientRect();
-      setActiveElementPosition(rect.y - rect.height);
+      if (activeMenuItemRef.current) {
+        const rect = activeMenuItemRef.current.getBoundingClientRect();
+        setActiveElementPosition(rect.y - rect.height);
+      } else {
+        setActiveElementPosition(0);
+      }
     }, []);
   }
 
