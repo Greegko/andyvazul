@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { Layout } from '../components/layout';
-import { getProjects, Project, ProjectType, CuratedProject } from '../queries/get-projects';
+import { getProjects, ProjectType, CuratedProject } from '../queries/get-projects';
 import { unique, urlFriendly } from '../utils';
 import { ProjectDisplay } from '../components/project-display';
 
@@ -11,8 +11,8 @@ const CuratedWorksPage = ({ location }) => {
   const allLabels = projects
     .map(x => x.projectGroupTitle)
     .filter(unique)
-    .map(projectGroupTitle => ({ order: 0, path: urlFriendly(projectGroupTitle), title: projectGroupTitle }));
-
+    .sort()
+    .map((projectGroupTitle: string, index: number) => ({ order: index, path: urlFriendly(projectGroupTitle), title: projectGroupTitle }));
 
   const groupedProjects: Record<string, CuratedProject[]> = projects.reduce((prev, current) => ({
     ...prev,

@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { getProjects, Project, ProjectType, ArtisticProject } from '../queries';
+import { getProjects, ProjectType, ArtisticProject } from '../queries';
 import { urlFriendly, unique } from '../utils';
 import { Layout } from '../components/layout';
 import { ProjectDisplay } from '../components/project-display';
@@ -11,7 +11,8 @@ const ArtisticWorksPage = ({ location }) => {
   const allLabels = projects
     .map(x => x.group)
     .filter(unique)
-    .map(group => ({ order: 0, path: urlFriendly(group), title: group }));
+    .sort()
+    .map((group: string, index: number) => ({ order: index, path: urlFriendly(group), title: group }));
 
   const groupedProjects: Record<string, ArtisticProject[]> = projects.reduce((prev, current) => ({
     ...prev,

@@ -27,7 +27,7 @@ export const Menu = ({ items, activeItem, base = '/', setActiveElementPosition }
   return (
     <div className="menu">
       <ul className="main-menu">
-        {items.sort((x, y) => x.order > y.order ? 1 : -1).map(({ path, title }) =>
+        {items.sort(sorter).map(({ path, title }) =>
           <li
             key={path}
             ref={path === activeItem ? activeMenuItemRef : undefined}
@@ -38,4 +38,12 @@ export const Menu = ({ items, activeItem, base = '/', setActiveElementPosition }
       </ul>
     </div>
   );
+}
+
+function sorter(x: MenuItem, y: MenuItem): number {
+  if (x.order === y.order) {
+    return x.title > y.title ? 1 : -1;
+  }
+
+  return x.order > y.order ? 1 : -1;
 }
