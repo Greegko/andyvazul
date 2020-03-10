@@ -26,6 +26,7 @@ const CuratedWorksPage = ({ location }) => {
             {projectGroups[key].map((project, index: number) => <ProjectDisplay
               {...project}
               group={index + 1}
+              noCaption
               groupSlug={project.projectGroup.title} />)}
           </div>
         </div>
