@@ -14,7 +14,7 @@ const IndexPage = ({ location }) => {
           <div className="news-content">{news}</div>
         </div>
       </div>
-      <Stern text={news} />
+      <Stern>{news}</Stern>
     </Layout>
   )
 }

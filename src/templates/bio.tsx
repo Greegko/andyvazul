@@ -10,7 +10,7 @@ const BioPage = ({ location, pageContext: { content } }) => {
       <div className='bio'>
         {render(content)}
       </div>
-      <Stern text={'Random Text'} />
+      <Stern>Random Text</Stern>
     </Layout>
   )
 }
