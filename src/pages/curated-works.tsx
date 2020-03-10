@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { Layout } from '../components/layout';
 import { getProjects, ProjectType, CuratedProject } from '../queries/get-projects';
-import { unique, urlFriendly } from '../utils';
+import { unique, urlFriendly, render } from '../utils';
 import { ProjectDisplay } from '../components/project-display';
 
 import './curated-works.css';
@@ -20,7 +20,7 @@ const CuratedWorksPage = ({ location }) => {
       {Object.keys(projectGroups).map(key =>
         <div className="project-group">
           <div className="project-group-header">
-            {projectGroups[key][0].title}
+            {render(projectGroups[key][0].projectGroup.header)}
           </div>
           <div className='project-group-content'>
             {projectGroups[key].map((project, index: number) => <ProjectDisplay
