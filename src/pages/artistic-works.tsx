@@ -23,7 +23,7 @@ const ArtisticWorksPage = ({ location }) => {
     <Layout location={location} submenu={allLabels}>
       <div className="projects">
         {allLabels.map(({ title }) => (
-          <div className='projects-group'>
+          <div className='project-group-content'>
             {groupedProjects[title].map(project => <ProjectDisplay
               groupSlug={project.group}
               group={project.group}

@@ -1,13 +1,4 @@
-.project {
-  margin: 5px;
-  flex: 0 0 300px;
-}
-
-.project img {
-  width: 100%;
-}
-
-.projects-group {
+.project-group-content {
   display: flex;
   flex-wrap: wrap;
   width: 1000px;

@@ -1,4 +1,5 @@
-.project-group {
-  display: inline-block;
-  width: 100px;
+.projects .project-group-content {
+  display: flex;
+  flex-wrap: wrap;
+  width: 1000px;
 }

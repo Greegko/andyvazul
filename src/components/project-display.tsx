@@ -3,6 +3,7 @@ import { Link } from 'gatsby';
 import { urlFriendly } from '../utils';
 import { ProjectType } from '../queries';
 
+import './project-display.css';
 export const ProjectDisplay = ({ imageUrl, title, groupSlug, group, slug, type }) => {
   const groupTypeSlug = type === ProjectType.Artistic ? 'artistic-works' : 'curated-works';
 

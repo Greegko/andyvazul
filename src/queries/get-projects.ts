@@ -1,4 +1,5 @@
 import { useStaticQuery, graphql } from "gatsby";
+import { Document } from '@contentful/rich-text-types';
 
 export enum ProjectType { Artistic, Curated };
 
@@ -16,7 +17,11 @@ export interface ArtisticProject extends ProjectBase {
 
 export interface CuratedProject extends ProjectBase {
   type: ProjectType.Curated;
-  projectGroupTitle: string;
+  projectGroup: {
+    id: string;
+    title: string;
+    header: Document
+  }
 }
 
 export type Project = ArtisticProject | CuratedProject;
@@ -41,7 +46,11 @@ export function getProjects(): Project[] {
           }
         },
         project_group {
+          id
           title
+          header {
+            json
+          }
         }
       }
     }
@@ -55,6 +64,10 @@ export function getProjects(): Project[] {
     type: x.type === 'Artistic work' ? ProjectType.Artistic : ProjectType.Curated,
     imageUrl: x.image?.file.url,
     content: x.content?.sourceCode.json,
-    projectGroupTitle: x.project_group ? x.project_group[0].title : undefined
+    projectGroup: x.project_group ? {
+      id: x.project_group[0].id,
+      title: x.project_group[0].title,
+      header: x.project_group[0].header.json
+    } : undefined
   }));
 }
