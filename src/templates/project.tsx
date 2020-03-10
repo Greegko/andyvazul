@@ -1,10 +1,10 @@
 import * as React from 'react';
-import { documentToReactComponents } from '@contentful/rich-text-react-renderer';
 import { Layout } from '../components/layout';
+import { render } from '../utils/render';
 
 const ProjectTemplate = ({ location, pageContext: { content, isArtisticWork } }) => (
   <Layout location={location}>
-    {documentToReactComponents(content)}
+    {render(content)}
   </Layout>
 );
 

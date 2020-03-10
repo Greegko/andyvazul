@@ -42,14 +42,18 @@ export function getProjects(): Project[] {
         },
         content {
           sourceCode{
-            json
+            childMarkdownRemark {
+              htmlAst
+            }
           }
         },
         project_group {
           id
           title
           header {
-            json
+            childMarkdownRemark {
+              htmlAst
+            }
           }
         }
       }
@@ -63,11 +67,11 @@ export function getProjects(): Project[] {
     slug: x.slug,
     type: x.type === 'Artistic work' ? ProjectType.Artistic : ProjectType.Curated,
     imageUrl: x.image?.file.url,
-    content: x.content?.sourceCode.json,
+    content: x.content?.childMarkdownRemark.htmlAst,
     projectGroup: x.project_group ? {
       id: x.project_group[0].id,
       title: x.project_group[0].title,
-      header: x.project_group[0].header.json
+      header: x.project_group[0].header.childMarkdownRemark.htmlAst
     } : undefined
   }));
 }

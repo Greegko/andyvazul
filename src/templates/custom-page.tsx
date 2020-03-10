@@ -1,11 +1,20 @@
 import * as React from 'react';
-import { documentToReactComponents } from '@contentful/rich-text-react-renderer';
 import { Layout } from '../components/layout';
+import { render } from '../utils/render';
+import { SubmenuContext } from '../components/context';
 
 export default function CustomPage({ location, pageContext: { content } }) {
+  const [submenuItems, setSubmenuItems] = React.useState([]);
+
+  const addSubmenuItem = (item) => {
+    setSubmenuItems((items) => [...items, item]);
+  }
+
   return (
-    <Layout location={location}>
-      {documentToReactComponents(content)}
-    </Layout>
+    <SubmenuContext.Provider value={{ addSubmenuItem }}>
+      <Layout location={location} submenu={submenuItems}>
+        {render(content)}
+      </Layout>
+    </SubmenuContext.Provider>
   );
 };

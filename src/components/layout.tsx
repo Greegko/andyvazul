@@ -33,7 +33,7 @@ export const Layout = ({ children, location, submenu }: LayoutProperties) => {
         <div className="title"><Link to="/">andyvazul</Link></div>
         <div className="menus">
           <Menu items={menu} activeItem={activeMenu} base="" setActiveElementPosition={setActiveMenuPosSave} />
-          {submenu && <div style={{ paddingTop: activeMenuPos - TitleHeight }}><Menu items={submenu} activeItem={activeSubMenu} base={"/" + activeMenu} /></div>}
+          {submenu && submenu.length > 0 && <div style={{ paddingTop: activeMenuPos - TitleHeight }}><Menu items={submenu} activeItem={activeSubMenu} base={"/" + activeMenu} /></div>}
         </div>
       </div>
       <div className="content" style={{ paddingTop: activeMenuPos }}>

@@ -8,6 +8,16 @@ module.exports = {
     `gatsby-plugin-react-helmet`,
     `gatsby-plugin-typescript`,
     {
+      resolve: `gatsby-transformer-remark`,
+      options: {
+        commonmark: true,
+        footnotes: true,
+        pedantic: true,
+        gfm: true,
+        plugins: [],
+      },
+    },
+    {
       resolve: `gatsby-source-contentful`,
       options: {
         spaceId: `0twrrzkpeklw`,

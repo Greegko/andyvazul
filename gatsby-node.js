@@ -18,7 +18,9 @@ async function generateMenuPages({ graphql, actions: { createPage }, reporter })
           order,
           content {
             sourceCode {
-              json
+              childMarkdownRemark {
+                htmlAst
+              }
             }
           }
         }
@@ -41,7 +43,7 @@ async function generateMenuPages({ graphql, actions: { createPage }, reporter })
       path: url,
       component,
       context: {
-        content: node.content.sourceCode.json
+        content: node.content.sourceCode.childMarkdownRemark.htmlAst
       }
     })
   });
@@ -60,7 +62,9 @@ async function generateProjectPages({ graphql, actions: { createPage }, reporter
         }
         content {
           sourceCode {
-            json
+            childMarkdownRemark {
+              htmlAst
+            }
           }
         }
       }
@@ -89,7 +93,7 @@ async function generateProjectPages({ graphql, actions: { createPage }, reporter
       component: projectTemplate,
       context: {
         isArtisticWork,
-        content: node.content.sourceCode.json
+        content: node.content.sourceCode.childMarkdownRemark.htmlAst
       }
     });
 

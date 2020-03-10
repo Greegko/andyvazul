@@ -2,9 +2,9 @@ import { useStaticQuery, graphql } from "gatsby";
 import { urlFriendly } from "../utils";
 
 export interface MenuItem {
-  order: number;
-  path: string;
   title: string;
+  path: string;
+  order?: number;
 }
 
 export function getMenuItems(): MenuItem[] {
