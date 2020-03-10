@@ -67,7 +67,7 @@ export function getProjects(): Project[] {
     slug: x.slug,
     type: x.type === 'Artistic work' ? ProjectType.Artistic : ProjectType.Curated,
     imageUrl: x.image?.file.url,
-    content: x.content?.childMarkdownRemark.htmlAst,
+    content: x.content?.childMarkdownRemark?.htmlAst,
     projectGroup: x.project_group ? {
       id: x.project_group[0].id,
       title: x.project_group[0].title,
