@@ -6,3 +6,8 @@
 .project img {
   width: 100%;
 }
+
+.project .project-group {
+  width: 100px;
+  display: inline-block;
+}
