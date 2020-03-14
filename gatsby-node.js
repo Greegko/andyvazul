@@ -15,9 +15,10 @@ async function generateMenuPages({ graphql, actions: { createPage }, reporter })
     {
       allContentfulMenu {
         nodes {
-          title,
           order,
           page {
+            title,
+            description,
             slug
             content {
               childMarkdownRemark {
@@ -45,6 +46,8 @@ async function generateMenuPages({ graphql, actions: { createPage }, reporter })
       path: url,
       component,
       context: {
+        title: node.page.title,
+        description: node.page.description,
         content: node.page.content.childMarkdownRemark.htmlAst
       }
     })
@@ -62,6 +65,8 @@ async function generateProjectPages({ graphql, actions: { createPage }, reporter
           title
         }
         page {
+          title,
+          description
           slug
           content {
             childMarkdownRemark {
@@ -95,6 +100,8 @@ async function generateProjectPages({ graphql, actions: { createPage }, reporter
       component: projectTemplate,
       context: {
         isArtisticWork,
+        title: node.page.title,
+        description: node.page.description,
         content: node.page.content.childMarkdownRemark.htmlAst
       }
     });
@@ -113,6 +120,7 @@ async function generateIndexPage({ graphql, actions: { createPage }, reporter })
     {
       contentfulPage(slug: {eq: "/"}) {
         title
+        description
         slug
         content {
           childMarkdownRemark {
@@ -138,6 +146,8 @@ async function generateIndexPage({ graphql, actions: { createPage }, reporter })
     path: url,
     component,
     context: {
+      title: node.title,
+      description: node.description,
       content: node.content.childMarkdownRemark.htmlAst
     }
   })

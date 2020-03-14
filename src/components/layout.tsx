@@ -2,10 +2,13 @@ import * as React from 'react';
 import { Menu } from './menu';
 import { getMenuItems, MenuItem } from '../queries';
 import { Link } from 'gatsby';
+import { Helmet } from 'react-helmet';
 
 interface LayoutProperties {
   children: any;
   location: any;
+  title: string;
+  description: string;
   submenu?: MenuItem[];
 }
 
@@ -14,7 +17,7 @@ const TitleHeight = 29;
 let LastActivePos = 0;
 
 import './layout.css';
-export const Layout = ({ children, location, submenu }: LayoutProperties) => {
+export const Layout = ({ children, location, submenu, title, description }: LayoutProperties) => {
   const [mainPath, subPath] = location.pathname.split("/").splice(1);
   const [activeMenuPos, setActiveMenuPos] = React.useState<number>(LastActivePos);
 
@@ -29,6 +32,10 @@ export const Layout = ({ children, location, submenu }: LayoutProperties) => {
 
   return (
     <div className="layout">
+      <Helmet>
+        <title>{title}</title>
+        <meta name="description" content={description} />
+      </Helmet>
       <div className="sidebar">
         <div className="title"><Link to="/">andyvazul</Link></div>
         <div className="menus">

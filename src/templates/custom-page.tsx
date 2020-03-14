@@ -4,7 +4,7 @@ import { render } from '../utils/render';
 import { SubmenuContext } from '../components/context';
 
 import './custom-page.css';
-export default function CustomPage({ location, pageContext: { content } }) {
+export default function CustomPage({ location, pageContext: { content, title, description } }) {
   const [submenuItems, setSubmenuItems] = React.useState([]);
 
   const addSubmenuItem = (item) => {
@@ -13,7 +13,7 @@ export default function CustomPage({ location, pageContext: { content } }) {
 
   return (
     <SubmenuContext.Provider value={{ addSubmenuItem }}>
-      <Layout location={location} submenu={submenuItems}>
+      <Layout location={location} submenu={submenuItems} title={title} description={description}>
         {render(content)}
       </Layout>
     </SubmenuContext.Provider>
