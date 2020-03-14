@@ -39,7 +39,7 @@ async function generateMenuPages({ graphql, actions: { createPage }, reporter })
 
 
   result.data.allContentfulMenu.nodes.filter(node => node.page).forEach((node) => {
-    const url = nameToPath(node.page.slug);
+    const url = nameToPath(addSlash(node.page.slug));
     const component = fs.existsSync(`src/templates/${url}.tsx`) ? path.resolve(`src/templates/${url}.tsx`) : path.resolve(`src/templates/custom-page.tsx`);
 
     createPage({
@@ -96,7 +96,7 @@ async function generateProjectPages({ graphql, actions: { createPage }, reporter
 
     // Create Project Page
     createPage({
-      path: pathPrefix + nameToPath(group) + node.page.slug,
+      path: pathPrefix + nameToPath(group) + addSlash(node.page.slug),
       component: projectTemplate,
       context: {
         isArtisticWork,
@@ -139,7 +139,7 @@ async function generateIndexPage({ graphql, actions: { createPage }, reporter })
 
   const node = result.data.contentfulPage;
 
-  const url = nameToPath(node.slug);
+  const url = nameToPath(addSlash(node.slug));
   const component = fs.existsSync(`src/templates/${url}.tsx`) ? path.resolve(`src/templates/${url}.tsx`) : path.resolve(`src/templates/custom-page.tsx`);
 
   createPage({
@@ -154,5 +154,9 @@ async function generateIndexPage({ graphql, actions: { createPage }, reporter })
 }
 
 function nameToPath(name) {
-  return name.replace(/[^a-zA-Z0-9\-/]/g, '-');
+  return name.toLowerCase().replace(/[^a-zA-Z0-9\-/]/g, '-');
+}
+
+function addSlash(path) {
+  return (path[0] !== '/') ? '/' + path : path;
 }

@@ -2,10 +2,10 @@ import * as React from 'react';
 import { Layout } from '../components/layout';
 import { render } from '../utils/render';
 
-const ProjectTemplate = ({ location, pageContext: { content, isArtisticWork } }) => (
-  <Layout location={location}>
-    {render(content)}
-  </Layout>
-);
-
-export default ProjectTemplate;
+export default function ProjectTemplate({ location, pageContext: { content, title, description, isArtisticWork } }) {
+  return (
+    <Layout location={location} title={title} description={description}>
+      {render(content)}
+    </Layout>
+  )
+}
