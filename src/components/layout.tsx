@@ -46,8 +46,11 @@ export const Layout = ({ children, location, submenu, title, description }: Layo
         <div className="title"><Link to="/">andyvazul</Link></div>
         <div className="menus">
           <Menu items={menu} activeItem={activeMenu} base="" setActiveElementPosition={setActiveMenuPosSave} />
-          {submenuItems && submenuItems.length > 0 &&
-            <div style={{ paddingTop: activeMenuPos - TitleHeight }}><Menu items={submenuItems} activeItem={activeSubMenu} base={"/" + activeMenu} /></div>}
+          {submenuItems.length > 0 &&
+            <div style={{ paddingTop: activeMenuPos - TitleHeight }}>
+              <Menu items={submenuItems} activeItem={activeSubMenu} base={"/" + activeMenu} />
+            </div>
+          }
         </div>
       </div>
       <div className="content" style={{ paddingTop: activeMenuPos }}>
