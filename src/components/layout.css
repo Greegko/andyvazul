@@ -15,6 +15,10 @@ html, body, #___gatsby {
   font-size: 12px;
 }
 
+.content {
+  white-space: pre-line;
+}
+
 .title {
   margin-bottom: 15px;
 }

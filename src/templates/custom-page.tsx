@@ -3,6 +3,7 @@ import { Layout } from '../components/layout';
 import { render } from '../utils/render';
 import { SubmenuContext } from '../components/context';
 
+import './custom-page.css';
 export default function CustomPage({ location, pageContext: { content } }) {
   const [submenuItems, setSubmenuItems] = React.useState([]);
 

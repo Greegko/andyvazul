@@ -33,15 +33,15 @@ export function getProjects(): Project[] {
       nodes {
         title,
         group,
-        slug,
         type,
         image {
           file {
             url
           }
         },
-        content {
-          sourceCode{
+        page {
+          slug
+          content {
             childMarkdownRemark {
               htmlAst
             }
@@ -64,10 +64,10 @@ export function getProjects(): Project[] {
   return ProjectQuery.allContentfulProject.nodes.map(x => ({
     title: x.title,
     group: x.group,
-    slug: x.slug,
+    slug: x.page.slug,
     type: x.type === 'Artistic work' ? ProjectType.Artistic : ProjectType.Curated,
     imageUrl: x.image?.file.url,
-    content: x.content?.childMarkdownRemark?.htmlAst,
+    content: x.page.content.childMarkdownRemark?.htmlAst,
     projectGroup: x.project_group ? {
       id: x.project_group[0].id,
       title: x.project_group[0].title,
