@@ -8,14 +8,10 @@ module.exports = {
     `gatsby-plugin-react-helmet`,
     `gatsby-plugin-typescript`,
     {
-      resolve: `gatsby-transformer-remark`,
+      resolve: "gatsby-transformer-remark",
       options: {
-        commonmark: true,
-        footnotes: true,
-        pedantic: true,
-        gfm: true,
-        plugins: [],
-      },
+        plugins: ["gatsby-remark-component"]
+      }
     },
     {
       resolve: `gatsby-source-contentful`,

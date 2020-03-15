@@ -2,14 +2,20 @@ import * as React from 'react';
 import { SubmenuContext } from '../context';
 import { urlFriendly } from '../../utils';
 
-export const SubmenuItem = ({ children }) => {
-  const title = children[0];
-  const path = urlFriendly(title);
+interface SubmenuItemProperties {
+  url?: string;
+  children: string | string[];
+  hidden?: boolean;
+}
+
+export const SubmenuItem = ({ children, url, hidden }: SubmenuItemProperties) => {
+  const title = typeof children === 'string' ? children : children[0];
+  const path = url ? url : '#' + urlFriendly(title);
 
   const context = React.useContext(SubmenuContext);
   React.useEffect(() => {
-    context.addSubmenuItem({ title, path: "#" + path });
+    context.addSubmenuItem({ title, path });
   }, []);
 
-  return <a id={path}></a>;
+  return hidden ? null : <a id={path}></a>;
 };

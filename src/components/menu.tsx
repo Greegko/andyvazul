@@ -30,9 +30,8 @@ export const Menu = ({ items, activeItem, base = '/', setActiveElementPosition }
         {items.sort(sorter).map(({ path, title }) =>
           <li
             key={path}
-            ref={path === activeItem ? activeMenuItemRef : undefined}
-            className={path === activeItem ? "menu-item-active" : ""}>
-            <Link to={base + "/" + path}>{title}</Link>
+            ref={path === activeItem ? activeMenuItemRef : undefined}>
+            <Link to={base + "/" + path} activeClassName="menu-item-active" partiallyActive={true}>{title}</Link>
           </li>
         )}
       </ul>

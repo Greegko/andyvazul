@@ -13,17 +13,14 @@ async function generateMenuPages({ graphql, actions: { createPage }, reporter })
   const result = await graphql(
     `
     {
-      allContentfulMenu {
+      allContentfulPage {
         nodes {
-          order,
-          page {
-            title,
-            description,
-            slug
-            content {
-              childMarkdownRemark {
-                htmlAst
-              }
+          title
+          description
+          slug
+          content {
+            childMarkdownRemark {
+              htmlAst
             }
           }
         }
@@ -38,17 +35,18 @@ async function generateMenuPages({ graphql, actions: { createPage }, reporter })
   }
 
 
-  result.data.allContentfulMenu.nodes.filter(node => node.page).forEach((node) => {
-    const url = nameToPath(addSlash(node.page.slug));
+  result.data.allContentfulPage.nodes.forEach(node => {
+    const url = nameToPath(addSlash(node.slug));
     const component = fs.existsSync(`src/templates/${url}.tsx`) ? path.resolve(`src/templates/${url}.tsx`) : path.resolve(`src/templates/custom-page.tsx`);
 
     createPage({
       path: url,
+      matchPath: url + '/*',
       component,
       context: {
-        title: node.page.title,
-        description: node.page.description,
-        content: node.page.content.childMarkdownRemark.htmlAst
+        title: node.title,
+        description: node.description,
+        content: node.content.childMarkdownRemark.htmlAst
       }
     })
   });
@@ -84,11 +82,7 @@ async function generateProjectPages({ graphql, actions: { createPage }, reporter
     return
   }
 
-
-  const artisticPage = path.resolve(`src/pages/artistic-works.tsx`);
-  const curatedPage = path.resolve(`src/pages/curated-works.tsx`);
   const projectTemplate = path.resolve(`src/templates/project.tsx`);
-
   result.data.allContentfulProject.nodes.filter(node => node.page).forEach(node => {
     const isArtisticWork = node.type === 'Artistic work';
     const pathPrefix = isArtisticWork ? '/artistic-works/' : '/curated-works/';
@@ -99,17 +93,11 @@ async function generateProjectPages({ graphql, actions: { createPage }, reporter
       path: pathPrefix + nameToPath(group) + addSlash(node.page.slug),
       component: projectTemplate,
       context: {
-        isArtisticWork,
+        projectType: isArtisticWork ? 0 : 1,
         title: node.page.title,
         description: node.page.description,
         content: node.page.content.childMarkdownRemark.htmlAst
       }
-    });
-
-    // Create Group Page
-    createPage({
-      path: pathPrefix + nameToPath(group),
-      component: isArtisticWork ? artisticPage : curatedPage,
     });
   });
 }
@@ -140,7 +128,7 @@ async function generateIndexPage({ graphql, actions: { createPage }, reporter })
   const node = result.data.contentfulPage;
 
   const url = nameToPath(addSlash(node.slug));
-  const component = fs.existsSync(`src/templates/${url}.tsx`) ? path.resolve(`src/templates/${url}.tsx`) : path.resolve(`src/templates/custom-page.tsx`);
+  const component = path.resolve(`src/templates/custom-page.tsx`);
 
   createPage({
     path: url,
