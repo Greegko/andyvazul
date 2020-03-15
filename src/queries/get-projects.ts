@@ -1,12 +1,15 @@
 import { useStaticQuery, graphql } from "gatsby";
-import { Document } from '@contentful/rich-text-types';
 
 export enum ProjectType { Artistic, Curated };
 
 export interface ProjectBase {
   title: string;
   slug: string;
-  imageUrl: string;
+  image: {
+    sizes: string;
+    src: string;
+    srcSet: string;
+  }
   content: any;
 }
 
@@ -35,8 +38,10 @@ export function getProjects(): Project[] {
         group,
         type,
         image {
-          file {
-            url
+          fluid(maxWidth: 500) {
+            sizes
+            src
+            srcSet
           }
         },
         page {
@@ -66,7 +71,11 @@ export function getProjects(): Project[] {
     group: x.group,
     slug: x.page.slug,
     type: x.type === 'Artistic work' ? ProjectType.Artistic : ProjectType.Curated,
-    imageUrl: x.image?.file.url,
+    image: {
+      sizes: x.image.fluid.sized,
+      src: x.image.fluid.src,
+      srcSet: x.image.fluid.srcSet,
+    },
     content: x.page.content.childMarkdownRemark?.htmlAst,
     projectGroup: x.project_group ? {
       id: x.project_group[0].id,
