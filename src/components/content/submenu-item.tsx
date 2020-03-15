@@ -10,7 +10,7 @@ interface SubmenuItemProperties {
 
 export const SubmenuItem = ({ children, url, hidden }: SubmenuItemProperties) => {
   const title = typeof children === 'string' ? children : children[0];
-  const path = url ? url : '#' + urlFriendly(title);
+  const path = url ? url : urlFriendly(title);
 
   const context = React.useContext(SubmenuContext);
   React.useEffect(() => {
