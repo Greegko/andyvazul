@@ -15,3 +15,38 @@
   float: left;
   margin-right: 100px;
 }
+
+
+/* Life Event page */
+.live-event {
+  display: flex;
+}
+
+.live-event div:nth-child(1) {
+  flex: 1;
+  max-width: 100px;
+}
+
+.live-event div:nth-child(2) {
+  flex: 1;
+  max-width: 100px;
+}
+
+.live-event div:nth-child(3) {
+  flex: 1;
+  max-width: 200px;
+}
+
+.live-event div:nth-child(4) {
+  flex: 1;
+  max-width: 200px;
+}
+
+.live-event div:nth-child(5) {
+  flex: 1;
+  max-width: 100px;
+}
+
+.live-event div:nth-child(6) {
+  flex: 1;
+}

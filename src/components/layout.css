@@ -15,8 +15,16 @@ html, body, #___gatsby {
   font-size: 12px;
 }
 
-.content {
+.content, .content > div {
+  width: 100%;
   white-space: pre-line;
+}
+
+.content > div > h1:first-child,
+.content > div > h2:first-child,
+.content > div > h3:first-child,
+.content > div > h4:first-child {
+  margin-top: 0px;
 }
 
 .title {
