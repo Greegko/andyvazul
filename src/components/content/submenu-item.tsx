@@ -17,5 +17,5 @@ export const SubmenuItem = ({ children, url, hidden }: SubmenuItemProperties) =>
     context.addSubmenuItem({ title, path });
   }, []);
 
-  return hidden ? null : <a id={path}></a>;
+  return <a id={path} className={'submenu-link' + (hidden ? ' hidden' : '')}></a>;
 };
