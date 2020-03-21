@@ -50,3 +50,21 @@
 .live-event div:nth-child(6) {
   flex: 1;
 }
+
+/* Flex */
+
+.flex {
+  display: flex;
+}
+
+.flex > *  {
+  flex: 1;
+}
+
+.flex-auto {
+  flex: 1;
+}
+
+.flex-fix {
+  flex: 0;
+}
