@@ -13,7 +13,7 @@ export const ListProjectsByGroup = () => {
     <div className="projects">
       {Object.keys(groupedProjects).map(group => (
         <div key={group}>
-          <SubmenuItem url={'/' + urlFriendly(group)}>{group}</SubmenuItem>
+          <SubmenuItem url={urlFriendly(group)} id={urlFriendly(group)}>{group}</SubmenuItem>
           <div className='project-group-content'>
             {groupedProjects[group].map(project => <ProjectDisplay
               key={project.title}

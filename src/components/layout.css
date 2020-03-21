@@ -9,14 +9,22 @@ html, body, #___gatsby {
   padding: 0;
 }
 
+#gatsby-focus-wrapper {
+  height: 100%;
+}
+
 .layout {
-  margin: 10px;
+  box-sizing: border-box;
+  padding: 10px 0 0 10px;
   display: flex;
+  height: 100%;
   font-size: 12px;
 }
 
 .content, .content > div {
+  box-sizing: border-box;
   width: 100%;
+  height: 100%;
   white-space: pre-line;
 }
 
@@ -35,6 +43,15 @@ html, body, #___gatsby {
   margin-right: 125px;
 }
 
+.sidebar--submenu {
+  margin-right: 250px;
+}
+
+.sidebar-content {
+  position: fixed;
+  top: 10px;
+}
+
 .menus {
   display: flex;
 }
@@ -42,4 +59,8 @@ html, body, #___gatsby {
 a, a:active, a:visited {
   text-decoration: none;
   color: black;
+}
+
+.hidden {
+  display: none;
 }

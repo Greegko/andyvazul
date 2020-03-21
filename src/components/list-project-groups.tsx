@@ -11,7 +11,7 @@ export const ListProjectGroups = () => {
 
   return Object.keys(projectGroups).map(key =>
     <div className="project-group" key={key}>
-      <SubmenuItem url={urlFriendly(key)}>{key}</SubmenuItem>
+      <SubmenuItem url={urlFriendly(key)} id={urlFriendly(key)}>{key}</SubmenuItem>
       <div className="project-group-header">
         {render(projectGroups[key][0].projectGroup.header)}
       </div>

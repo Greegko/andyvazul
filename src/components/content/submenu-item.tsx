@@ -6,9 +6,10 @@ interface SubmenuItemProperties {
   url?: string;
   children: string | string[];
   hidden?: boolean;
+  id?: string;
 }
 
-export const SubmenuItem = ({ children, url, hidden }: SubmenuItemProperties) => {
+export const SubmenuItem = ({ children, url, hidden, id = children as string }: SubmenuItemProperties) => {
   const title = typeof children === 'string' ? children : children[0];
   const path = url ? url : urlFriendly(title);
 
@@ -17,5 +18,5 @@ export const SubmenuItem = ({ children, url, hidden }: SubmenuItemProperties) =>
     context.addSubmenuItem({ title, path });
   }, []);
 
-  return hidden ? null : <a id={path}></a>;
+  return <a id={"submenu-" + id} data-path={path} className={'submenu-link' + (hidden ? ' hidden' : '')}></a>;
 };
