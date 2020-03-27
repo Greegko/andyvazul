@@ -7,6 +7,7 @@ html, body, #___gatsby {
   margin: 0;
   height: 100%;
   padding: 0;
+  font-family: 'Roboto', sans-serif;
 }
 
 #gatsby-focus-wrapper {
@@ -23,7 +24,7 @@ html, body, #___gatsby {
 
 .content, .content > div {
   box-sizing: border-box;
-  width: 1380px;
+  max-width: 1380px;
   height: 100%;
   white-space: pre-line;
 }
@@ -41,6 +42,7 @@ html, body, #___gatsby {
 
 .sidebar {
   width: 315px;
+  margin-right: 38px;
 }
 
 .sidebar-content {
