@@ -23,7 +23,7 @@ html, body, #___gatsby {
 
 .content, .content > div {
   box-sizing: border-box;
-  width: 100%;
+  width: 1380px;
   height: 100%;
   white-space: pre-line;
 }
@@ -40,11 +40,7 @@ html, body, #___gatsby {
 }
 
 .sidebar {
-  margin-right: 125px;
-}
-
-.sidebar--submenu {
-  margin-right: 250px;
+  width: 315px;
 }
 
 .sidebar-content {
