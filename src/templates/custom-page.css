@@ -20,27 +20,22 @@
 
 .live-event div:nth-child(1) {
   flex: 1;
-  max-width: 100px;
 }
 
 .live-event div:nth-child(2) {
   flex: 1;
-  max-width: 100px;
 }
 
 .live-event div:nth-child(3) {
-  flex: 1;
-  max-width: 200px;
+  flex: 2;
 }
 
 .live-event div:nth-child(4) {
-  flex: 1;
-  max-width: 200px;
+  flex: 2;
 }
 
 .live-event div:nth-child(5) {
   flex: 1;
-  max-width: 100px;
 }
 
 .live-event div:nth-child(6) {

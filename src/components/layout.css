@@ -25,6 +25,7 @@ html, body, #___gatsby {
 .content, .content > div {
   box-sizing: border-box;
   max-width: 1380px;
+  width: 100%;
   height: 100%;
   white-space: pre-line;
 }
@@ -41,7 +42,7 @@ html, body, #___gatsby {
 }
 
 .sidebar {
-  width: 315px;
+  flex: 0 0 315px;
   margin-right: 38px;
 }
 
