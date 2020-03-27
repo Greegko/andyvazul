@@ -1,0 +1,30 @@
+.image-row {
+  margin: -5px 0 0 -5px;
+  display: flex;
+}
+
+.image-row .image-wrapper {
+  margin: 5px;
+  flex: 0 0 33%;
+  width: 33%;
+  max-height: 250px;
+}
+
+.image-row .image-wrapper img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.image-row .image-wrapper img.with-caption {
+  height: 93%;
+}
+
+.image-row .image-wrapper .group {
+  width: 130px;
+  display: inline-block;
+}
+
+.image-row .image-wrapper .title {
+  display: inline-block;
+}
