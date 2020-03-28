@@ -4,6 +4,7 @@ import { urlFriendly, groupBy } from '../utils';
 import { SubmenuItem } from './content';
 import { Image, Images } from './content/images';
 
+import './list-projects-by-group.scss';
 export const ListProjectsByGroup = () => {
   const projects = getProjects().filter(project => project.type === ProjectType.Artistic) as ArtisticProject[];
   const groupedProjects: Record<string, ArtisticProject[]> = groupBy(projects, x => x.group.toString());
@@ -25,6 +26,7 @@ export const ListProjectsByGroup = () => {
       {Object.keys(groupedProjects).map(group => (
         <div key={group}>
           <SubmenuItem url={urlFriendly(group)} id={urlFriendly(group)}>{group}</SubmenuItem>
+          <div className="group-title">{group}</div>
           <Images images={groupedProjects[group].map(createImagesFromProjects)} />
         </div>
       ))}

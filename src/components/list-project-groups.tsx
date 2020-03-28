@@ -4,7 +4,6 @@ import { urlFriendly, render, groupBy } from '../utils';
 import { SubmenuItem } from './content';
 import { Images, Image } from './content/images';
 
-import './list-project-groups.css';
 export const ListProjectGroups = () => {
   const projects = getProjects().filter(project => project.type === ProjectType.Curated) as CuratedProject[];
   const projectGroups = groupBy(projects, project => project.projectGroup.title);
@@ -22,9 +21,9 @@ export const ListProjectGroups = () => {
   return Object.keys(projectGroups).map(key =>
     <div className="project-group" key={key}>
       <SubmenuItem url={urlFriendly(key)} id={urlFriendly(key)}>{key}</SubmenuItem>
-      <div className="project-group-header">
-        {render(projectGroups[key][0].projectGroup.header)}
-      </div>
+
+      {render(projectGroups[key][0].projectGroup.header)}
+
       <Images images={projectGroups[key].map(createImagesFromProjects)} />
     </div>
   );

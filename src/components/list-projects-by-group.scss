@@ -1,0 +1,10 @@
+.projects {
+  .group-title {
+    font-weight: bold;
+    margin-bottom: 16px;
+
+    @media (min-width: 576px) {
+      display: none;
+    }
+  }
+}

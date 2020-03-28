@@ -16,7 +16,7 @@ interface LayoutProperties {
 const TitleHeight = 29;
 const Padding = 10;
 
-import './layout.css';
+import './layout.scss';
 export const Layout = ({ children, location, submenu, title, description }: LayoutProperties) => {
   const [mainMenuPath, submenuPath, projectPath] = location.pathname.split("/").splice(1);
 
