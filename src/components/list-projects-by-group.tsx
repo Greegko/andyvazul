@@ -1,16 +1,18 @@
 import * as React from 'react';
 import { getProjects, ProjectType, ArtisticProject } from '../queries';
-import { urlFriendly, groupBy } from '../utils';
+import { urlFriendly } from '../utils';
 import { SubmenuItem } from './content';
 import { Image, Images } from './content/images';
+import { groupBy } from 'ramda';
+import { getProjectUrl } from '../utils/get-project-url';
 
 import './list-projects-by-group.scss';
 export const ListProjectsByGroup = () => {
   const projects = getProjects().filter(project => project.type === ProjectType.Artistic) as ArtisticProject[];
-  const groupedProjects: Record<string, ArtisticProject[]> = groupBy(projects, x => x.group.toString());
+  const groupedProjects: Record<string, ArtisticProject[]> = groupBy(x => x.group.toString(), projects);
 
   const createImagesFromProjects = (project: ArtisticProject): Image => {
-    const link = `/artistic-works/${urlFriendly(project.group)}/${project.slug}`;
+    const link = getProjectUrl(project, true);
 
     return {
       alt: project.title,

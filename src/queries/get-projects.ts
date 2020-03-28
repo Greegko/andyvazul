@@ -15,7 +15,7 @@ export interface ProjectBase {
 
 export interface ArtisticProject extends ProjectBase {
   type: ProjectType.Artistic;
-  group: string | number;
+  group: string;
 }
 
 export interface CuratedProject extends ProjectBase {

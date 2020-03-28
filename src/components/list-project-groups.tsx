@@ -1,16 +1,18 @@
 import * as React from 'react';
 import { getProjects, ProjectType, CuratedProject } from '../queries/get-projects';
-import { urlFriendly, render, groupBy } from '../utils';
+import { urlFriendly, render } from '../utils';
 import { SubmenuItem } from './content';
 import { Images, Image } from './content/images';
+import { groupBy } from 'ramda';
 
 import './list-project-groups.scss';
+import { getProjectUrl } from '../utils/get-project-url';
 export const ListProjectGroups = () => {
   const projects = getProjects().filter(project => project.type === ProjectType.Curated) as CuratedProject[];
-  const projectGroups = groupBy(projects, project => project.projectGroup.title);
+  const projectGroups = groupBy(project => project.projectGroup.title, projects);
 
   const createImagesFromProjects = (project: CuratedProject): Image => {
-    const link = `/curated-works/${urlFriendly(project.projectGroup.title)}/${project.slug}`;
+    const link = getProjectUrl(project, true);
 
     return {
       alt: project.title,

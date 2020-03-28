@@ -1,1 +1,1 @@
-export const urlFriendly = (path: string) => path.toLowerCase().replace(/[^\w]/g, '-');
+export const urlFriendly = (path: string | number) => path.toString().toLowerCase().replace(/[^\w]/g, '-');
