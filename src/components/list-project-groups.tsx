@@ -4,6 +4,7 @@ import { urlFriendly, render, groupBy } from '../utils';
 import { SubmenuItem } from './content';
 import { Images, Image } from './content/images';
 
+import './list-project-groups.scss';
 export const ListProjectGroups = () => {
   const projects = getProjects().filter(project => project.type === ProjectType.Curated) as CuratedProject[];
   const projectGroups = groupBy(projects, project => project.projectGroup.title);
