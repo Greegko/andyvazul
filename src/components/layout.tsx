@@ -36,7 +36,7 @@ export const Layout = ({ children, location, submenu, subsubmenu, title, descrip
     submenuItems,
     subsubmenuItems,
     mainMenuPath,
-    contentPadding: projectPath ? submenuMenuPos : activeMenuPos,
+    contentPadding: projectPath ? subsubmenuMenuPos : activeMenuPos,
     activeSubmenu,
     activeSubSubmenu,
     setSubSubmenuMenuPos,
