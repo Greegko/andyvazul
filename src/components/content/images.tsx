@@ -11,7 +11,7 @@ export interface Image {
 
 import './images.scss';
 export const Images = ({ images }: { images: Image[] }) => {
-  return <div className="image-grid">{images.map(x => <ImageDisplay key={x.title} {...x} />)}</div>;
+  return <div className="image-grid">{images.map(x => <ImageDisplay key={x.src} {...x} />)}</div>;
 }
 
 const ImageDisplay = (image: Image) => (
