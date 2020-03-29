@@ -1,0 +1,14 @@
+.stern {
+  width: 50%;
+  font-family: Stern;
+  font-size: 220px;
+  letter-spacing: -0.6em;
+  word-break: break-all;
+  line-height: 70%;
+  
+  @media (min-width: 576px) {
+    font-size: 600px;
+    letter-spacing: -360px;
+    line-height: 405px;
+  }
+}

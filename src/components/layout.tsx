@@ -10,6 +10,7 @@ interface LayoutProperties {
   location: any;
   title: string;
   description: string;
+  displayAsBlock?: boolean;
   submenu?: MenuItem[];
   subsubmenu?: MenuItem[];
 }
@@ -17,7 +18,7 @@ interface LayoutProperties {
 const Padding = 20;
 
 import './layout.scss';
-export const Layout = ({ children, location, submenu, subsubmenu, title, description }: LayoutProperties) => {
+export const Layout = ({ children, location, submenu, subsubmenu, title, description, displayAsBlock }: LayoutProperties) => {
   const [mainMenuPath, submenuPath, projectPath] = location.pathname.split("/").splice(1);
 
   const [activeSubmenu, setActiveSubmenu] = React.useState<string>(() => submenuPath);
@@ -31,6 +32,7 @@ export const Layout = ({ children, location, submenu, subsubmenu, title, descrip
   const addSubmenuItem = (item: MenuItem) => setSubmenuItems(items => [...items, { ...item, order: items.length }]);
 
   const displayCoreProperties: LayoutDisplayCore = {
+    displayAsBlock,
     title,
     description,
     submenuItems,
@@ -118,6 +120,7 @@ const LayoutSubmenuScroll = (props: LayoutSubmenuScrollProperties & LayoutDispla
 
     const contentLink = contentLinks.find(x => x.id === 'submenu-' + props.submenuPath);
     const pos = contentLink ? (contentLink.offsetTop - props.contentPadding) : 0;
+    console.log('Scroll trigger', contentLink.offsetTop, props.contentPadding, pos);
     window.scrollTo(0, pos);
   }, [props.contentPadding, props.submenuPath, contentLinks, contentHeight]);
 
@@ -151,6 +154,7 @@ const LayoutSubmenuScroll = (props: LayoutSubmenuScrollProperties & LayoutDispla
 }
 
 interface LayoutDisplayCore {
+  displayAsBlock;
   title;
   description;
   submenuItems;
@@ -179,7 +183,7 @@ const LayoutDisplay = (props: LayoutDisplayCore & LayoutDisplayScroll) => {
   const menuItemsWithTitle: MenuItem[] = [{ path: "/", title: "andyvazul", order: 0, style: { marginBottom: 30 } }, ...menuItems];
 
   return (
-    <div className="layout">
+    <div className={"layout" + (props.displayAsBlock ? " layout-block" : "")}>
       <Helmet>
         <title>{props.title}</title>
         <meta name="description" content={props.description} />
