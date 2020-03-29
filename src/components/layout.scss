@@ -19,14 +19,16 @@ html, body, #___gatsby {
   padding: 20px;
   height: 100%;
   font-size: 12px;
-  
-  
+  display: flex;
+
   &-block {
     display: block;
   }
   
   @media (min-width: 576px) { 
-    display: flex;
+    &-block {
+      display: flex;
+    }
   }
 
   .content {

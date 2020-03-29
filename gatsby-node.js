@@ -129,11 +129,10 @@ async function generateIndexPage({ graphql, actions: { createPage }, reporter })
 
   const node = result.data.contentfulPage;
 
-  const url = nameToPath(addSlash(node.slug));
   const component = path.resolve(`src/templates/custom-page.tsx`);
 
   createPage({
-    path: url,
+    path: "/",
     component,
     context: {
       title: node.title,
@@ -149,7 +148,7 @@ function nameToPath(path) {
     .toLowerCase()
     .replace(/[^\w]/g, '-')
     .replace(/(\w)\W+$/, "\$1")
-    .replace(/^\W+(\w)/, "\$1");;
+    .replace(/^\W+(\w)/, "\$1");
 }
 
 function addSlash(path) {

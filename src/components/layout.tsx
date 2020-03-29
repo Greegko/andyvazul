@@ -131,8 +131,9 @@ const LayoutSubmenuScroll = (props: LayoutSubmenuScrollProperties & LayoutDispla
     if (contentLinks.length === 0) return;
 
     const submenu = submenuLinks.find(x => x.getAttribute('href').endsWith("/" + props.submenuPath));
+    const menuPadding = submenu.offsetTop ? submenu.offsetTop : props.activeMenuPos;
     const contentLink = contentLinks.find(x => x.id === 'submenu-' + props.submenuPath);
-    const pos = contentLink ? (getNextVisibleElement(contentLink).offsetTop - (submenu.offsetTop - props.contentPadding)) : 0;
+    const pos = contentLink ? (getNextVisibleElement(contentLink).offsetTop - (menuPadding - props.contentPadding)) : 0;
     window.scrollTo(0, pos);
   }, [props.contentPadding, props.submenuPath, submenuLinks, contentLinks, contentHeight]);
 
