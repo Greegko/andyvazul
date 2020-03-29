@@ -30,10 +30,11 @@ html, body, #___gatsby {
   white-space: pre-line;
 }
 
-.content > div > h1:first-child,
-.content > div > h2:first-child,
-.content > div > h3:first-child,
-.content > div > h4:first-child {
+.content div > h1:first-child,
+.content div > h2:first-child,
+.content div > h3:first-child,
+.content div > h4:first-child, 
+.content div > p:first-child {
   margin-top: 0px;
 }
 
@@ -49,7 +50,6 @@ html, body, #___gatsby {
 
 .sidebar-content {
   position: fixed;
-  top: 10px;
 
   .title {
     margin-bottom: 15px;
