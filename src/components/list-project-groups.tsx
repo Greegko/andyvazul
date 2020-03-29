@@ -4,9 +4,9 @@ import { urlFriendly, render } from '../utils';
 import { SubmenuItem } from './content';
 import { Images, Image } from './content/images';
 import { groupBy } from 'ramda';
+import { getProjectUrl } from '../utils/get-project-url';
 
 import './list-project-groups.scss';
-import { getProjectUrl } from '../utils/get-project-url';
 export const ListProjectGroups = () => {
   const projects = getProjects().filter(project => project.type === ProjectType.Curated) as CuratedProject[];
   const projectGroups = groupBy(project => project.projectGroup.title, projects);
