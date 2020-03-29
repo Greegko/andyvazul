@@ -118,11 +118,11 @@ const LayoutSubmenuScroll = (props: LayoutSubmenuScrollProperties & LayoutDispla
     if (contentHeight === 0) return;
     if (contentLinks.length === 0) return;
 
+    const submenu = submenuLinks.find(x => x.getAttribute('href').endsWith("/" + props.submenuPath));
     const contentLink = contentLinks.find(x => x.id === 'submenu-' + props.submenuPath);
-    const pos = contentLink ? (contentLink.offsetTop - props.contentPadding) : 0;
-    console.log('Scroll trigger', contentLink.offsetTop, props.contentPadding, pos);
+    const pos = contentLink ? (contentLink.offsetTop - (submenu.offsetTop - props.contentPadding)) : 0;
     window.scrollTo(0, pos);
-  }, [props.contentPadding, props.submenuPath, contentLinks, contentHeight]);
+  }, [props.contentPadding, props.submenuPath, submenuLinks, contentLinks, contentHeight]);
 
   React.useEffect(() => {
     if (contentHeight === 0) return;

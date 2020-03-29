@@ -143,8 +143,13 @@ async function generateIndexPage({ graphql, actions: { createPage }, reporter })
   })
 }
 
-function nameToPath(name) {
-  return name.toLowerCase().replace(/[^a-zA-Z0-9\-/]/g, '-');
+function nameToPath(path) {
+  return path
+    .toString()
+    .toLowerCase()
+    .replace(/[^\w]/g, '-')
+    .replace(/(\w)\W+$/, "\$1")
+    .replace(/^\W+(\w)/, "\$1");;
 }
 
 function addSlash(path) {
