@@ -74,8 +74,6 @@ interface LayoutSubmenuScrollProperties {
 const getNextVisibleElement = (node: HTMLLinkElement): HTMLElement => {
   let next = node.nextElementSibling ? node.nextElementSibling as HTMLElement : node.parentElement.nextElementSibling as HTMLElement;
 
-  console.log(node, next);
-
   while (!next.offsetParent) {
     next = next.nextElementSibling as HTMLElement;
   }
