@@ -42,11 +42,11 @@ html, body, #___gatsby {
     }
   }
   
-  .content div > h1:first-child,
-  .content div > h2:first-child,
-  .content div > h3:first-child,
-  .content div > h4:first-child, 
-  .content div > p:first-child {
+  .content div > h1,
+  .content div > h2,
+  .content div > h3,
+  .content div > h4, 
+  .content div > p {
     margin-top: 0px;
   }
   

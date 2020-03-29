@@ -71,9 +71,21 @@ interface LayoutSubmenuScrollProperties {
   submenuPath;
 }
 
+const getNextVisibleElement = (node: HTMLLinkElement): HTMLElement => {
+  let next = node.nextElementSibling ? node.nextElementSibling as HTMLElement : node.parentElement.nextElementSibling as HTMLElement;
+
+  console.log(node, next);
+
+  while (!next.offsetParent) {
+    next = next.nextElementSibling as HTMLElement;
+  }
+
+  return next;
+}
+
 const LayoutSubmenuScroll = (props: LayoutSubmenuScrollProperties & LayoutDisplayCore) => {
   const [contentHeight, setContentHeight] = React.useState<number>(0);
-  const [contentLinks, setContentLinks] = React.useState<HTMLElement[]>([]);
+  const [contentLinks, setContentLinks] = React.useState<HTMLLinkElement[]>([]);
   const [submenuLinks, setSubmenuLinks] = React.useState<HTMLLinkElement[]>([]);
 
   const submenuRef = React.useCallback(node => {
@@ -92,7 +104,7 @@ const LayoutSubmenuScroll = (props: LayoutSubmenuScrollProperties & LayoutDispla
   const contentRef = React.useCallback(node => {
     if (!node) return;
 
-    const links = [...node.querySelectorAll('.submenu-link')] as HTMLElement[];
+    const links = [...node.querySelectorAll('.submenu-link')] as HTMLLinkElement[];
     setContentLinks(links);
   }, [props.children]);
 
@@ -108,7 +120,7 @@ const LayoutSubmenuScroll = (props: LayoutSubmenuScrollProperties & LayoutDispla
 
     const lastSubmenu = submenuLinks[submenuLinks.length - 1];
     const lastLink = contentLinks[contentLinks.length - 1];
-    const pos = document.body.clientHeight + lastLink.offsetTop - lastSubmenu.offsetTop - Padding;
+    const pos = document.body.clientHeight + getNextVisibleElement(lastLink).offsetTop - lastSubmenu.offsetTop - Padding;
     setContentHeight(pos);
   }, [props.activeMenuPos, contentLinks, submenuLinks]);
 
@@ -120,7 +132,7 @@ const LayoutSubmenuScroll = (props: LayoutSubmenuScrollProperties & LayoutDispla
 
     const submenu = submenuLinks.find(x => x.getAttribute('href').endsWith("/" + props.submenuPath));
     const contentLink = contentLinks.find(x => x.id === 'submenu-' + props.submenuPath);
-    const pos = contentLink ? (contentLink.offsetTop - (submenu.offsetTop - props.contentPadding)) : 0;
+    const pos = contentLink ? (getNextVisibleElement(contentLink).offsetTop - (submenu.offsetTop - props.contentPadding)) : 0;
     window.scrollTo(0, pos);
   }, [props.contentPadding, props.submenuPath, submenuLinks, contentLinks, contentHeight]);
 
@@ -130,7 +142,7 @@ const LayoutSubmenuScroll = (props: LayoutSubmenuScrollProperties & LayoutDispla
     if (submenuLinks.length === 0) return;
 
     const scrollLocationCheck = () => {
-      const menuIndex = Math.max(0, contentLinks.filter((x, index) => y(x) <= y(submenuLinks[index])).length - 1);
+      const menuIndex = Math.max(0, contentLinks.map(getNextVisibleElement).filter((x, index) => y(x) <= y(submenuLinks[index])).length - 1);
       const menuHref = submenuLinks[menuIndex].attributes.getNamedItem('href').nodeValue;
       const submenuPart = menuHref.split('/')[2];
 
