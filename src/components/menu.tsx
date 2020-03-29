@@ -6,37 +6,31 @@ interface MenuProperties {
   items: MenuItem[];
   activeItem: string;
   base: string;
+  padding: number;
   setActiveElementPosition?: (pos: number) => void;
 }
 
-import "./menu.css";
-export const Menu = ({ items, activeItem, base = '/', setActiveElementPosition }: MenuProperties) => {
-  const activeMenuItemRef = React.createRef<HTMLLIElement>();
+import "./menu.scss";
+export const Menu = ({ items, activeItem, base = '/', setActiveElementPosition, padding }: MenuProperties) => {
+  const activeMenuItemRef = React.useCallback<(node: HTMLLIElement) => void>(node => {
+    if (!node) return;
 
-  if (setActiveElementPosition) {
-    React.useEffect(() => {
-      if (activeMenuItemRef.current) {
-        const rect = activeMenuItemRef.current.getBoundingClientRect();
-        setActiveElementPosition(rect.y - rect.height);
-      } else {
-        setActiveElementPosition(0);
-      }
-    }, []);
-  }
+    console.log(activeItem, node.offsetTop);
+
+    setActiveElementPosition(node.offsetTop);
+  }, [padding]);
 
   return (
-    <div className="menu">
-      <ul className="main-menu">
-        {items.sort(sorter).map(({ path, title }) =>
-          <li
-            key={path}
-            ref={path === activeItem ? activeMenuItemRef : undefined}
-            className={path === activeItem ? "menu-item-active" : ""}>
-            <Link to={base + "/" + path}>{title}</Link>
-          </li>
-        )}
-      </ul>
-    </div>
+    <ul className="menu-block" style={{ paddingTop: padding }}>
+      {items.sort(sorter).map(({ path, title }) =>
+        <li
+          key={path}
+          ref={path === activeItem ? activeMenuItemRef : undefined}
+          className={path === activeItem ? "menu-block-item-active" : ""}>
+          <Link to={base + "/" + path}>{title}</Link>
+        </li>
+      )}
+    </ul>
   );
 }
 

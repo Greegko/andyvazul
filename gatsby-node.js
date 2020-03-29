@@ -57,6 +57,7 @@ async function generateProjectPages({ graphql, actions: { createPage }, reporter
   query {
     allContentfulProject {
       nodes {
+        id
         group,
         type,
         project_group {
@@ -93,6 +94,7 @@ async function generateProjectPages({ graphql, actions: { createPage }, reporter
       path: pathPrefix + nameToPath(group) + addSlash(node.page.slug),
       component: projectTemplate,
       context: {
+        id: node.id,
         projectType: isArtisticWork ? 0 : 1,
         title: node.page.title,
         description: node.page.description,

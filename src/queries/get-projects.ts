@@ -3,6 +3,7 @@ import { useStaticQuery, graphql } from "gatsby";
 export enum ProjectType { Artistic, Curated };
 
 export interface ProjectBase {
+  id: string;
   title: string;
   slug: string;
   image: {
@@ -34,6 +35,7 @@ export function getProjects(): Project[] {
   query {
     allContentfulProject {
       nodes {
+        id,
         title,
         group,
         type,
@@ -67,6 +69,7 @@ export function getProjects(): Project[] {
   `);
 
   return ProjectQuery.allContentfulProject.nodes.map(x => ({
+    id: x.id,
     title: x.title,
     group: x.group,
     slug: x.page.slug,

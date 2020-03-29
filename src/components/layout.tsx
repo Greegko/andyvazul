@@ -11,19 +11,23 @@ interface LayoutProperties {
   title: string;
   description: string;
   submenu?: MenuItem[];
+  subsubmenu?: MenuItem[];
 }
 
 const TitleHeight = 29;
 const Padding = 10;
 
 import './layout.scss';
-export const Layout = ({ children, location, submenu, title, description }: LayoutProperties) => {
+export const Layout = ({ children, location, submenu, subsubmenu, title, description }: LayoutProperties) => {
   const [mainMenuPath, submenuPath, projectPath] = location.pathname.split("/").splice(1);
 
   const [activeSubmenu, setActiveSubmenu] = React.useState<string>(() => submenuPath);
+  const [activeSubSubmenu] = React.useState<string>(() => projectPath);
   const [activeMenuPos, setActiveMenuPos] = React.useState<number>(0);
   const [submenuMenuPos, setSubmenuMenuPos] = React.useState<number>(0);
+  const [subsubmenuMenuPos, setSubSubmenuMenuPos] = React.useState<number>(0);
   const [submenuItems, setSubmenuItems] = React.useState<MenuItem[]>(() => submenu || []);
+  const [subsubmenuItems] = React.useState<MenuItem[]>(() => subsubmenu || []);
 
   const addSubmenuItem = (item: MenuItem) => setSubmenuItems(items => [...items, { ...item, order: items.length }]);
 
@@ -31,10 +35,14 @@ export const Layout = ({ children, location, submenu, title, description }: Layo
     title,
     description,
     submenuItems,
+    subsubmenuItems,
     mainMenuPath,
-    contentPadding: submenuMenuPos || activeMenuPos,
+    contentPadding: subsubmenuMenuPos || submenuMenuPos || activeMenuPos,
     activeSubmenu,
+    activeSubSubmenu,
+    setSubSubmenuMenuPos,
     menuPadding: activeMenuPos,
+    subMenuPadding: submenuMenuPos,
     children,
     setActiveMenuPos,
     setSubmenuMenuPos,
@@ -149,11 +157,15 @@ interface LayoutDisplayCore {
   title;
   description;
   submenuItems;
+  subsubmenuItems;
   mainMenuPath;
   setActiveMenuPos;
   contentPadding;
   activeSubmenu;
   menuPadding;
+  subMenuPadding;
+  activeSubSubmenu;
+  setSubSubmenuMenuPos;
   setSubmenuMenuPos;
   children;
 }
@@ -176,11 +188,24 @@ const LayoutDisplay = (props: LayoutDisplayCore & LayoutDisplayScroll) => {
       <div className={"sidebar" + (props.submenuItems.length > 0 ? " sidebar--submenu" : "")}>
         <div className="sidebar-content">
           <div className="title"><Link to="/">andyvazul</Link></div>
-          <div className="menus">
-            <Menu items={menuItems} activeItem={props.mainMenuPath} base="" setActiveElementPosition={props.setActiveMenuPos} />
+          <div className="menu">
+            <Menu items={menuItems} activeItem={props.mainMenuPath} base="" setActiveElementPosition={props.setActiveMenuPos} padding={0} />
             {props.submenuItems.length > 0 &&
-              <div ref={props.submenuRef} className="submenu" style={{ paddingTop: props.menuPadding - TitleHeight }}>
-                <Menu items={props.submenuItems} activeItem={props.activeSubmenu} base={"/" + props.mainMenuPath} setActiveElementPosition={props.setSubmenuMenuPos} />
+              <div ref={props.submenuRef} className="submenu">
+                <Menu items={props.submenuItems}
+                  activeItem={props.activeSubmenu}
+                  base={"/" + props.mainMenuPath}
+                  setActiveElementPosition={props.setSubmenuMenuPos}
+                  padding={props.menuPadding} />
+              </div>
+            }
+            {props.subsubmenuItems.length > 0 &&
+              <div ref={props.submenuRef} className="subsubmenu">
+                <Menu items={props.subsubmenuItems}
+                  activeItem={props.activeSubSubmenu}
+                  base={"/" + props.mainMenuPath + "/" + props.activeSubmenu}
+                  setActiveElementPosition={props.setSubSubmenuMenuPos}
+                  padding={props.subMenuPadding} />
               </div>
             }
           </div>
