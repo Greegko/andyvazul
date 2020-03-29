@@ -4,6 +4,7 @@ import { urlFriendly } from "../utils";
 export interface MenuItem {
   title: string;
   path: string;
+  style?: object;
   order?: number;
 }
 

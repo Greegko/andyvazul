@@ -22,9 +22,10 @@ export const Menu = ({ items, activeItem, base = '/', setActiveElementPosition, 
 
   return (
     <ul className="menu-block" style={{ paddingTop: padding }}>
-      {items.sort(sorter).map(({ path, title }) =>
+      {items.sort(sorter).map(({ path, title, style }) =>
         <li
           key={path}
+          style={style}
           ref={path === activeItem ? activeMenuItemRef : undefined}
           className={path === activeItem ? "menu-block-item-active" : ""}>
           <Link to={base + "/" + path}>{title}</Link>

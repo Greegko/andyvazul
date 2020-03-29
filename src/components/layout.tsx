@@ -179,6 +179,8 @@ interface LayoutDisplayScroll {
 const LayoutDisplay = (props: LayoutDisplayCore & LayoutDisplayScroll) => {
   const [menuItems] = React.useState<MenuItem[]>(getMenuItems());
 
+  const menuItemsWithTitle: MenuItem[] = [{ path: "/", title: "andyvazul", order: 0, style: { marginBottom: 30 } }, ...menuItems];
+
   return (
     <div className="layout">
       <Helmet>
@@ -187,9 +189,8 @@ const LayoutDisplay = (props: LayoutDisplayCore & LayoutDisplayScroll) => {
       </Helmet>
       <div className={"sidebar" + (props.submenuItems.length > 0 ? " sidebar--submenu" : "")}>
         <div className="sidebar-content">
-          <div className="title"><Link to="/">andyvazul</Link></div>
           <div className="menu">
-            <Menu items={menuItems} activeItem={props.mainMenuPath} base="" setActiveElementPosition={props.setActiveMenuPos} padding={0} />
+            <Menu items={menuItemsWithTitle} activeItem={props.mainMenuPath} base="" setActiveElementPosition={props.setActiveMenuPos} padding={0} />
             {props.submenuItems.length > 0 &&
               <div ref={props.submenuRef} className="submenu">
                 <Menu items={props.submenuItems}
