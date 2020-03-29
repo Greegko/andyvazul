@@ -15,8 +15,6 @@ export const Menu = ({ items, activeItem, base = '/', setActiveElementPosition, 
   const activeMenuItemRef = React.useCallback<(node: HTMLLIElement) => void>(node => {
     if (!node) return;
 
-    console.log(activeItem, node.offsetTop);
-
     setActiveElementPosition(node.offsetTop);
   }, [padding]);
 

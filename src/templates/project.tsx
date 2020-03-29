@@ -26,12 +26,10 @@ export default function ProjectTemplate({ location, pageContext: { content, titl
 
   // Find project siblings
   const project = projects.find(x => x.id === id);
-  console.log(project, title, id);
   const sameGroup = projects.filter(x =>
     (x.type === ProjectType.Artistic ? x.group : x.projectGroup.id) ===
     (project.type === ProjectType.Artistic ? project.group : project.projectGroup.id)
-  )
-
+  );
 
   const subsubmenu: MenuItem[] = sameGroup.map((x, order) => ({ title: x.title.toLowerCase(), order, path: x.slug }))
 

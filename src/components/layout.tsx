@@ -118,7 +118,6 @@ const LayoutSubmenuScroll = (props: LayoutSubmenuScrollProperties & LayoutDispla
 
     const contentLink = contentLinks.find(x => x.id === 'submenu-' + props.submenuPath);
     const pos = contentLink ? (contentLink.offsetTop - props.contentPadding) : 0;
-    console.log('Scroll trigger', contentLink.offsetTop, props.contentPadding, pos);
     window.scrollTo(0, pos);
   }, [props.contentPadding, props.submenuPath, contentLinks, contentHeight]);
 
