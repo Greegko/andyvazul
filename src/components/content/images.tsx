@@ -15,7 +15,7 @@ export const Images = ({ images }: { images: Image[] }) => {
 }
 
 const ImageDisplay = (image: Image) => (
-  <div className={"image-wrapper" + (image.group || image.title ? " with-caption" : "")}>
+  <div className={"image-wrapper" + (image.group || image.title ? " image-wrapper-with-caption" : "")}>
     {image.link &&
       <Link to={image.link}>
         <img src={image.src} alt={image.alt} />
