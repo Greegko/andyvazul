@@ -14,8 +14,7 @@ interface LayoutProperties {
   subsubmenu?: MenuItem[];
 }
 
-const TitleHeight = 29;
-const Padding = 10;
+const Padding = 20;
 
 import './layout.scss';
 export const Layout = ({ children, location, submenu, subsubmenu, title, description }: LayoutProperties) => {
@@ -37,7 +36,7 @@ export const Layout = ({ children, location, submenu, subsubmenu, title, descrip
     submenuItems,
     subsubmenuItems,
     mainMenuPath,
-    contentPadding: subsubmenuMenuPos || submenuMenuPos || activeMenuPos,
+    contentPadding: projectPath ? submenuMenuPos : activeMenuPos,
     activeSubmenu,
     activeSubSubmenu,
     setSubSubmenuMenuPos,
@@ -107,22 +106,21 @@ const LayoutSubmenuScroll = (props: LayoutSubmenuScrollProperties & LayoutDispla
 
     const lastSubmenu = submenuLinks[submenuLinks.length - 1];
     const lastLink = contentLinks[contentLinks.length - 1];
-    const pos = document.body.clientHeight - y(lastSubmenu) + lastLink.offsetTop - props.activeMenuPos - Padding;
+    const pos = document.body.clientHeight + lastLink.offsetTop - lastSubmenu.offsetTop - Padding;
     setContentHeight(pos);
   }, [props.activeMenuPos, contentLinks, submenuLinks]);
 
   React.useEffect(() => {
-    if (props.activeMenuPos === 0) return;
     if (!props.submenuPath) return;
+    if (!props.contentPadding) return;
     if (contentHeight === 0) return;
     if (contentLinks.length === 0) return;
-    if (submenuLinks.length === 0) return;
 
-    const menuIndex = submenuLinks.findIndex(x => x.href.endsWith("/" + props.submenuPath));
     const contentLink = contentLinks.find(x => x.id === 'submenu-' + props.submenuPath);
-    const pos = contentLink ? (contentLink.offsetTop - props.activeMenuPos - Padding - 19 * menuIndex) : 0;
+    const pos = contentLink ? (contentLink.offsetTop - props.contentPadding) : 0;
+    console.log('Scroll trigger', contentLink.offsetTop, props.contentPadding, pos);
     window.scrollTo(0, pos);
-  }, [props.submenuPath, submenuLinks, contentLinks, contentHeight]);
+  }, [props.contentPadding, props.submenuPath, contentLinks, contentHeight]);
 
   React.useEffect(() => {
     if (contentHeight === 0) return;
