@@ -87,7 +87,15 @@ async function generateProjectPages({ graphql, actions: { createPage }, reporter
   result.data.allContentfulProject.nodes.filter(node => node.page).forEach(node => {
     const isArtisticWork = node.type === 'Artistic work';
     const pathPrefix = isArtisticWork ? '/artistic-works/' : '/curated-works/';
-    const group = isArtisticWork ? node.group : node.project_group[0].title;
+    let group;
+
+    if (isArtisticWork) {
+      group = node.group;
+    } else {
+      if (!node.project_group) return;
+
+      group = node.project_group[0].title;
+    }
 
     // Create Project Page
     createPage({
