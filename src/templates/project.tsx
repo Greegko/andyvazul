@@ -41,7 +41,8 @@ export default function ProjectTemplate({ location, pageContext: { content, titl
 
   // Find image contents
   const imageIndex = content.children.findIndex(isImageP);
-  const contentWithoutImage = { type: "root", children: content.children.slice(0, imageIndex) };
+  const slicedContent = imageIndex !== -1 ? content.children.slice(0, imageIndex) : content.children;
+  const contentWithoutImage = { type: "root", children: slicedContent };
   const images = content.children.slice(imageIndex).filter(x => !isEmptyLine(x)).map(getImage);
 
   return (
