@@ -40,10 +40,14 @@ export default function ProjectTemplate({ location, pageContext: { content, titl
   });
 
   // Find image contents
+  let images = [];
+  let contentWithoutImage = content;
+
   const imageIndex = content.children.findIndex(isImageP);
-  const slicedContent = imageIndex !== -1 ? content.children.slice(0, imageIndex) : content.children;
-  const contentWithoutImage = { type: "root", children: slicedContent };
-  const images = content.children.slice(imageIndex).filter(x => !isEmptyLine(x)).map(getImage);
+  if (imageIndex !== -1) {
+    contentWithoutImage = { type: "root", children: content.children.slice(0, imageIndex) };
+    images = content.children.slice(imageIndex).filter(x => !isEmptyLine(x)).map(getImage);
+  }
 
   return (
     <Layout location={location} title={title} description={description} submenu={submenu} subsubmenu={subsubmenu}>
