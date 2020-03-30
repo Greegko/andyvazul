@@ -17,6 +17,8 @@ export const ListProjectGroups = () => {
     return {
       alt: project.title,
       src: project.image.src,
+      title: project.title,
+      group: project.projectGroup.title,
       link
     }
   };
