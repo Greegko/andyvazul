@@ -68,7 +68,7 @@ export function getProjects(): Project[] {
   }
   `);
 
-  return ProjectQuery.allContentfulProject.nodes.map(x => ({
+  return ProjectQuery.allContentfulProject.nodes.filter(removeUnassignedProject).map(x => ({
     id: x.id,
     title: x.title,
     group: x.group,
@@ -86,4 +86,10 @@ export function getProjects(): Project[] {
       header: x.project_group[0].header.childMarkdownRemark.htmlAst
     } : undefined
   }));
+}
+
+const removeUnassignedProject = node => {
+  if (node.type === 'Artistic work') return true;
+
+  return node.project_group;
 }
