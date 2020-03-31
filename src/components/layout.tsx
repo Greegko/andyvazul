@@ -1,7 +1,6 @@
 import * as React from 'react';
 import { Menu } from './menu';
 import { getMenuItems, MenuItem } from '../queries';
-import { Link } from 'gatsby';
 import { Helmet } from 'react-helmet';
 import { SubmenuContext } from '../components/context';
 
@@ -17,6 +16,7 @@ interface LayoutProperties {
 
 const Padding = 20;
 
+import './custom-content-style.scss';
 import './layout.scss';
 export const Layout = ({ children, location, submenu, subsubmenu, title, description, displayAsBlock }: LayoutProperties) => {
   const [mainMenuPath, submenuPath, projectPath] = location.pathname.split("/").splice(1);
