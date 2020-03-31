@@ -91,6 +91,7 @@ async function generateProjectPages({ graphql, actions: { createPage }, reporter
 
     if (isArtisticWork) {
       group = node.group;
+      if (!group) return;
     } else {
       if (!node.project_group) return;
 
