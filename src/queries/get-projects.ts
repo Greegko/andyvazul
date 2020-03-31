@@ -89,7 +89,5 @@ export function getProjects(): Project[] {
 }
 
 const removeUnassignedProject = node => {
-  if (node.type === 'Artistic work') return true;
-
-  return node.project_group;
+  return node.type === 'Artistic work' ? node.group : node.project_group;
 }
