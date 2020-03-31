@@ -14,11 +14,14 @@ export function getMenuItems(): MenuItem[] {
     allContentfulMenu {
       nodes {
         title,
-        order
+        order,
+        page {
+          slug
+        }
       }
     }
   }
   `);
 
-  return MenuQuery.allContentfulMenu.nodes.map(x => ({ ...x, path: urlFriendly(x.title) }));
+  return MenuQuery.allContentfulMenu.nodes.map(x => ({ ...x, path: x.page ? urlFriendly(x.page.slug) : urlFriendly(x.title) }));
 }
