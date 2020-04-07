@@ -6,7 +6,7 @@ export const ProjectGroup = ({ children }) => {
   return (
     <div style={{ display: 'flex' }}>
       <div style={{ flex: 1 }}>{items[0]}</div>
-      <div style={{ flex: 0 }}>{items[1]}</div>
+      <div style={{ flex: 1, textAlign: 'right' }}>{items[1]}</div>
     </div>
   );
 };
