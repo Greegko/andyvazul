@@ -14,5 +14,19 @@
 .p-2 { padding: 16px; }
 .p-3 { padding: 24px; }
 
-.grid-2 { display: grid; grid-template-columns: 1fr 1fr; }
-.grid-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; }
+.grid-2 {
+  display: block;
+
+  @media (min-width: 992px) { 
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+  }
+}
+.grid-3 {
+  display: block;
+
+  @media (min-width: 992px) { 
+    display: grid;
+    grid-template-columns: 1fr 1fr; 
+  }
+}
