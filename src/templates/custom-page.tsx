@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { Layout } from '../components/layout';
-import { render } from '../utils/render';
+import { render, isNewLine } from '../utils/render';
 
 import './custom-page.scss';
 export default function CustomPage({ location, pageContext: { content, title, description } }) {
@@ -20,4 +20,3 @@ export default function CustomPage({ location, pageContext: { content, title, de
 };
 
 const isSubmenuItem = node => node.type === 'element' && node.children.length === 1 && node.children[0].tagName === 'submenu-item';
-const isNewLine = node => node.type === "text" && node.value.match(/^\s$/) !== null;
