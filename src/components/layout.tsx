@@ -147,9 +147,8 @@ const LayoutSubmenuScroll = (props: LayoutSubmenuScrollProperties & LayoutDispla
 
       if (submenuPart !== props.activeSubmenu) {
         props.setActiveSubmenu(submenuPart);
+        window.history.pushState({}, null, menuHref);
       }
-
-      window.history.pushState({}, null, menuHref);
     };
 
     window.addEventListener('scroll', scrollLocationCheck, true);
