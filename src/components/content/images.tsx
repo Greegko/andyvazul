@@ -16,12 +16,14 @@ export const Images = ({ images }: { images: Image[] }) => {
 
 const ImageDisplay = (image: Image) => (
   <div className={"image-wrapper" + (image.group || image.title ? " image-wrapper-with-caption" : "")}>
-    {image.link &&
-      <Link to={image.link}>
-        <img src={image.src} alt={image.alt} />
-      </Link>
-    }
-    {!image.link && <img className={image.group || image.title ? "with-caption" : ""} src={image.src} alt={image.alt || image.title} />}
+    <div className="image">
+      {image.link &&
+        <Link to={image.link}>
+          <img src={image.src} alt={image.alt} />
+        </Link>
+      }
+      {!image.link && <img className={image.group || image.title ? "with-caption" : ""} src={image.src} alt={image.alt || image.title} />}
+    </div>
     {image.group && <div className="group">{image.group}</div>}
     {image.title && <div className="title">{image.title}</div>}
   </div >
