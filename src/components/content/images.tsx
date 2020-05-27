@@ -24,7 +24,9 @@ const ImageDisplay = (image: Image) => (
       }
       {!image.link && <img className={image.group || image.title ? "with-caption" : ""} src={image.src} alt={image.alt || image.title} />}
     </div>
-    {image.group && <div className="group">{image.group}</div>}
-    {image.title && <div className="title">{image.title}</div>}
+    <div className="caption">
+      {image.group && <div className="group">{image.group}</div>}
+      {image.title && <div className="title">{image.title}</div>}
+    </div>
   </div >
 );

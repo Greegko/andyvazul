@@ -37,13 +37,16 @@
       object-fit: cover;
     }
 
-    .group {
-      width: 130px;
-      display: inline-block;
-    }
+    .caption {
+      display: flex;
 
-    .title {
-      display: inline-block;
+      .group {
+        flex: 0 0 130px;
+      }
+      
+      .title {
+        flex: 1;
+      }
     }
   }
 }
