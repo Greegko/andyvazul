@@ -6,6 +6,7 @@ export interface ProjectBase {
   id: string;
   title: string;
   slug: string;
+  order?: number;
   image: {
     sizes: string;
     src: string;
@@ -24,7 +25,8 @@ export interface CuratedProject extends ProjectBase {
   projectGroup: {
     id: string;
     title: string;
-    header: Document
+    header: Document;
+    order?: number;
   }
 }
 
@@ -39,6 +41,7 @@ export function getProjects(): Project[] {
         title,
         group,
         type,
+        order,
         image {
           fluid(maxWidth: 500) {
             sizes
@@ -55,8 +58,9 @@ export function getProjects(): Project[] {
           }
         },
         project_group {
-          id
-          title
+          id,
+          title,
+          order,
           header {
             childMarkdownRemark {
               htmlAst
@@ -79,11 +83,13 @@ export function getProjects(): Project[] {
       src: x.image.fluid.src,
       srcSet: x.image.fluid.srcSet,
     },
+    order: x.order || Infinity,
     content: x.page.content.childMarkdownRemark?.htmlAst,
     projectGroup: x.project_group ? {
       id: x.project_group[0].id,
       title: x.project_group[0].title,
-      header: x.project_group[0].header.childMarkdownRemark.htmlAst
+      header: x.project_group[0].header.childMarkdownRemark.htmlAst,
+      order: x.project_group[0].order || Infinity
     } : undefined
   }));
 }
