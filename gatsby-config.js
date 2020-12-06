@@ -9,15 +9,13 @@ module.exports = {
     `gatsby-plugin-typescript`,
     `gatsby-plugin-sass`,
     {
-      resolve: `gatsby-plugin-prefetch-google-fonts`,
+      resolve: `gatsby-plugin-google-fonts`,
       options: {
         fonts: [
-          {
-            family: `Roboto`,
-            variants: [`400`, `700`]
-          },
+          `roboto:400,700`
         ],
-      },
+        display: 'swap'
+      }
     },
     {
       resolve: "gatsby-transformer-remark",
