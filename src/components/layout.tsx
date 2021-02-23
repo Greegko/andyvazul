@@ -29,7 +29,7 @@ export const Layout = ({ children, location, submenu, subsubmenu, title, descrip
   const [submenuItems, setSubmenuItems] = React.useState<MenuItem[]>(() => submenu || []);
   const [subsubmenuItems] = React.useState<MenuItem[]>(() => subsubmenu || []);
 
-  const addSubmenuItem = (item: MenuItem) => setSubmenuItems(items => [...items, { ...item, order: items.length }]);
+  const addSubmenuItem = (item: MenuItem) => setSubmenuItems(items => [...items, { ...item, order: item.order ?? items.length }])
 
   const displayCoreProperties: LayoutDisplayCore = {
     displayAsBlock,

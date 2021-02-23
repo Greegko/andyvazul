@@ -19,6 +19,7 @@ interface ProjectTemplateProperties {
 
 export default function ProjectTemplate({ location, pageContext: { content, title, id, description, projectType } }: ProjectTemplateProperties) {
   const projects = getProjects();
+  console.log(projects);
   const projectGroups = uniqBy(
     (x: Project) => x.type === ProjectType.Artistic ? x.group : x.projectGroup.title,
     projects.filter(x => x.type === projectType)
@@ -31,12 +32,13 @@ export default function ProjectTemplate({ location, pageContext: { content, titl
     (project.type === ProjectType.Artistic ? project.group : project.projectGroup.id)
   );
 
-  const subsubmenu: MenuItem[] = sameGroup.map((x, order) => ({ title: x.title.toLowerCase(), order, path: x.slug }))
+  const subsubmenu: MenuItem[] = sameGroup.map((x, index) => ({ title: x.title.toLowerCase(), order: x.order ?? index, path: x.slug }))
 
   // Group submenus
-  const submenu: MenuItem[] = projectGroups.map((project, order) => {
+  const submenu: MenuItem[] = projectGroups.map((project, index) => {
     const title = project.type === ProjectType.Artistic ? project.group : project.projectGroup.title;
-    return { title, path: urlFriendly(title), order };
+    const order = project.type === ProjectType.Artistic ? project.order : project.projectGroup.order;
+    return { title, path: urlFriendly(title), order: order ?? index };
   });
 
   // Find image contents

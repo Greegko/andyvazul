@@ -29,6 +29,7 @@ export const ListProjectGroups = () => {
 
   return sortBy(x => x[0].projectGroup.order, projectGroups).map((projects) => {
     const key = projects[0].projectGroup.title;
+    const order = projects[0].projectGroup.order;
 
     return (
       <div className="project-group" key={key}>
