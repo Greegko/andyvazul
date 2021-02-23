@@ -80,5 +80,9 @@ function chunks(array, size) {
 }
 
 function getNumberOfImages() {
-  return window.innerWidth < 992 ? 1 : (window.innerWidth < 1200 ? 2 : 3);
+  if (typeof window !== 'undefined') {
+    return window.innerWidth < 992 ? 1 : (window.innerWidth < 1200 ? 2 : 3);
+  } else {
+    return 1;
+  }
 }
