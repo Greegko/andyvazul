@@ -19,7 +19,6 @@ interface ProjectTemplateProperties {
 
 export default function ProjectTemplate({ location, pageContext: { content, title, id, description, projectType } }: ProjectTemplateProperties) {
   const projects = getProjects();
-  console.log(projects);
   const projectGroups = uniqBy(
     (x: Project) => x.type === ProjectType.Artistic ? x.group : x.projectGroup.title,
     projects.filter(x => x.type === projectType)
