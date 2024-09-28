@@ -8,20 +8,19 @@ module.exports = {
     `gatsby-plugin-react-helmet`,
     `gatsby-plugin-typescript`,
     `gatsby-plugin-sass`,
+    "gatsby-plugin-image",
     {
       resolve: `gatsby-plugin-google-fonts`,
       options: {
-        fonts: [
-          `roboto:400,700`
-        ],
-        display: 'swap'
-      }
+        fonts: [`roboto:400,700`],
+        display: "swap",
+      },
     },
     {
       resolve: "gatsby-transformer-remark",
       options: {
-        plugins: ["gatsby-remark-component"]
-      }
+        plugins: ["gatsby-remark-component"],
+      },
     },
     {
       resolve: `gatsby-source-contentful`,
